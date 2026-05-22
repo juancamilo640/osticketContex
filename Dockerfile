@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-# Instalar extensiones necesarias para osTicket
+# Instalar dependencias del sistema de forma segura
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -8,16 +8,21 @@ RUN apt-get update && apt-get install -y \
     libintl-dev \
     libxml2-dev \
     libzip-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd intl mysqli xml zip opcache
+    zip \
+    unzip \
+    && rm -rf /var/list/apt/lists/*
 
-# Habilitar mod_rewrite de Apache
+# Configurar e instalar extensiones de PHP requeridas por osTicket
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd intl mysqli xml zip opcache
+
+# Habilitar el módulo de reescritura para los enlaces de osTicket
 RUN a2enmod rewrite
 
-# Copiar los archivos del proyecto al servidor web
+# Copiar el código al directorio del servidor Apache
 COPY . /var/www/html/
 
-# Ajustar permisos para osTicket
+# Asegurar permisos correctos para que funcione el instalador web
 RUN chown -R www-data:www-data /var/www/html/
 
 EXPOSE 80
