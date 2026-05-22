@@ -1,0 +1,485 @@
+/* =====================================================
+   SCP CUSTOM THEME — Agentes & Admin
+   Mismo fondo y estilo premium que el portal de usuario
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Fondo global ── */
+html, body {
+    background: #1a2a4a !important;
+    background-image: url('../../scp/css/img/fondo.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
+    min-height: 100% !important;
+    font-family: 'Inter', "Lato", "Helvetica Neue", arial, sans-serif !important;
+}
+
+/* ── Container principal — premium card ── */
+#container {
+    width: 980px !important;
+    margin: 18px auto 24px auto !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.2) !important;
+    position: relative !important;
+}
+
+/* ── Header ── */
+#header {
+    height: 72px !important;
+    padding: 0 20px !important;
+    background: linear-gradient(135deg, #0050a0 0%, #002060 100%) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 14px 14px 0 0 !important;
+}
+
+#header #logo {
+    height: 60px !important;
+    padding: 4px 0 4px 4px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+#header #logo img {
+    max-height: 54px !important;
+    max-width: 280px !important;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.5)) brightness(1.05) !important;
+}
+
+#header p#info {
+    background: transparent !important;
+    border: none !important;
+    color: rgba(255,255,255,0.85) !important;
+    font-size: 13px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: right !important;
+}
+div#header a {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500 !important;
+    transition: color 0.2s !important;
+}
+div#header a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* ── Nav principal ── */
+#nav,
+#nav.no-pjax {
+    background: linear-gradient(180deg, #003f99 0%, #002575 100%) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    padding: 0 20px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25) !important;
+}
+
+#nav .active,
+#nav .inactive {
+    height: 36px !important;
+    line-height: 36px !important;
+    border-radius: 8px 8px 0 0 !important;
+    border: none !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    min-width: 80px !important;
+    transition: background-color 0.2s ease !important;
+}
+
+#nav .inactive a {
+    color: rgba(255,255,255,0.8) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2px !important;
+}
+
+#nav .active a {
+    color: #fff !important;
+    font-weight: 700 !important;
+}
+
+#nav li.active {
+    background: rgba(255,255,255,0.18) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#nav li.inactive:hover {
+    background: rgba(255,255,255,0.1) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#nav li.inactive:hover > a,
+#nav li.inactive:hover > a * {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+/* Dropdown del nav */
+#nav li.inactive > ul {
+    background: #001f5c !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 0 0 8px 8px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35) !important;
+    top: 36px !important;
+}
+#nav .inactive li a {
+    color: rgba(255,255,255,0.85) !important;
+    padding: 6px 12px 6px 34px !important;
+}
+#nav .inactive li a:hover {
+    color: #fff !important;
+    background-color: rgba(255,255,255,0.12) !important;
+    text-decoration: none !important;
+}
+
+/* ── Sub-nav (colas de tickets) ── */
+#sub_nav {
+    background: rgba(0,40,100,0.08) !important;
+    border-bottom: 1px solid rgba(0,60,130,0.15) !important;
+    padding: 3px 20px !important;
+}
+#sub_nav > li > a,
+#customQ_nav .jb-overflowmenu-menu-primary li.item > a {
+    color: #003070 !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+}
+#sub_nav > li > a:hover,
+#customQ_nav .jb-overflowmenu-menu-primary li.item:hover > a {
+    color: #0050a0 !important;
+    text-decoration: none !important;
+}
+#sub_nav a.active,
+#sub_nav li.active > a {
+    color: #003f99 !important;
+    font-weight: 700 !important;
+}
+
+/* ── Content area ── */
+#content {
+    background: transparent !important;
+    padding: 20px 24px !important;
+}
+
+/* ── Breadcrumbs ── */
+#breadcrumbs {
+    background: rgba(0,60,140,0.06) !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(0,60,140,0.10) !important;
+    color: #224 !important;
+}
+#breadcrumbs a {
+    color: #0050a0 !important;
+}
+
+/* ── Tablas de tickets ── */
+table.list thead th {
+    background: linear-gradient(180deg, #f0f6ff 0%, #e2eeff 100%) !important;
+    color: #003070 !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.4px !important;
+    border-bottom: 2px solid #c0d4f0 !important;
+}
+table.list tbody tr:hover td {
+    background-color: #f0f7ff !important;
+}
+table.list tbody tr.odd td {
+    background-color: #fafcff !important;
+}
+
+/* ── Links ── */
+.link, a {
+    color: #0050a0 !important;
+}
+a:hover, .link:hover {
+    color: #003070 !important;
+    text-decoration: underline !important;
+}
+
+/* ── Cabeceras de secciones ── */
+h1, h2, h3 {
+    font-family: 'Inter', sans-serif !important;
+}
+h1 { color: #002060 !important; font-weight: 700 !important; }
+h2 { color: #003070 !important; font-weight: 600 !important; }
+h3 { color: #004090 !important; font-weight: 600 !important; }
+
+/* ── Footer del SCP ── */
+#footer,
+div.footer {
+    background: rgba(0,20,60,0.85) !important;
+    color: #b0c8f0 !important;
+    border-top: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 0 0 14px 14px !important;
+    padding: 12px 20px !important;
+    z-index: 1 !important;
+}
+
+/* ============================================================
+   MODALES Y VENTANAS EMERGENTES (Fix para interacción)
+   ============================================================ */
+
+#overlay {
+    z-index: 10000 !important;
+    background: rgba(0, 15, 40, 0.65) !important;
+    pointer-events: none !important;
+}
+
+.dialog, 
+div[id^="confirm-action"], 
+div.dialog,
+.dialog.draggable {
+    z-index: 11000 !important; 
+    pointer-events: auto !important;
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45) !important;
+    padding: 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #1a2a4a !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 90% !important;
+    width: 500px !important;
+    height: auto !important;
+}
+
+/* Fix para el botón de cerrar (X) */
+.dialog a.close {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    color: #999 !important;
+    font-size: 20px !important;
+    text-decoration: none !important;
+}
+.dialog a.close:hover {
+    color: #333 !important;
+}
+
+.dialog h3 {
+    margin-top: 0 !important;
+    color: #003070 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    border-bottom: 1px solid #eee !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 15px !important;
+}
+
+.dialog hr {
+    border: none !important;
+    border-top: 1px solid #eee !important;
+    margin: 15px 0 !important;
+}
+
+.dialog input[type="button"],
+.dialog input[type="submit"],
+.dialog .buttons input {
+    margin: 5px !important;
+    padding: 10px 20px !important;
+    font-size: 13px !important;
+}
+
+.dialog input.confirm,
+.dialog input[type="submit"] {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0050a0 100%) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.dialog input.close {
+    background: #f0f2f5 !important;
+    color: #444 !important;
+    border: 1px solid #ccc !important;
+}
+
+/* ============================================================
+   BOTONES Y ACCIONES — Fix para botones de eliminar y otros
+   ============================================================ */
+
+.button, .btn, input[type="submit"], input[type="button"],
+a.button {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 7px !important;
+    padding: 8px 16px !important;
+    transition: all 0.15s ease !important;
+    cursor: pointer !important;
+}
+
+.button.primary, .btn-primary, input[type="submit"] {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0050a0 100%) !important;
+    border: none !important;
+    color: #fff !important;
+    box-shadow: 0 3px 10px rgba(0,80,160,0.25) !important;
+}
+
+.button.green, .btn-success {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+    color: #fff !important;
+}
+
+/* Fix para .action-button (el trigger de dropdowns como "More") */
+span.action-button {
+    background: #fff !important;
+    border: 1.5px solid #b8cfe8 !important;
+    border-radius: 7px !important;
+    padding: 5px 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    color: #003070 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 5px rgba(0,60,140,0.06) !important;
+}
+span.action-button:hover {
+    border-color: #0072bc !important;
+    background-color: #f0f7ff !important;
+}
+
+/* Fix para el caret dentro de action-button */
+span.action-button i.icon-caret-down {
+    border-left: 1px solid #c8d8f0 !important;
+    margin-left: 8px !important;
+    padding-left: 8px !important;
+    height: 16px !important;
+    line-height: 16px !important;
+}
+
+/* ── Dropdowns de acciones (More, etc.) ── */
+.action-dropdown {
+    z-index: 9999 !important;
+    background: #fff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25) !important;
+    border: 1px solid rgba(0,60,140,0.15) !important;
+    padding: 6px 0 !important;
+    min-width: 180px !important;
+}
+
+.action-dropdown ul {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.action-dropdown ul li a {
+    padding: 10px 16px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: #333 !important;
+    transition: all 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.action-dropdown ul li a i {
+    margin-right: 12px !important;
+    width: 16px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+}
+
+.action-dropdown ul li a:hover {
+    background-color: #f0f6ff !important;
+    color: #0050a0 !important;
+}
+
+/* Estilo para el botón de ELIMINAR (danger) */
+.action-dropdown ul li.danger a {
+    color: #d93025 !important;
+}
+.action-dropdown ul li.danger a:hover {
+    background-color: #fef2f2 !important;
+    color: #d93025 !important;
+}
+
+/* ============================================================
+   SELECTS — Estilo premium para todos los selects del SCP
+   ============================================================ */
+
+select,
+body select,
+#content select,
+form select,
+.row select,
+.tip_content select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    height: auto !important;
+    min-height: 36px !important;
+    padding: 6px 36px 6px 12px !important;
+    background-color: #f5f8ff !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath fill='%230050a0' d='M7 9L0 0h14z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 10px !important;
+    border: 1.5px solid #b8cfe8 !important;
+    border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: #1a2a4a !important;
+    box-shadow: 0 1px 4px rgba(0,60,140,0.06) !important;
+    transition: all 0.2s !important;
+}
+
+select:focus {
+    border-color: #0072bc !important;
+    box-shadow: 0 0 0 3px rgba(0,114,188,0.18) !important;
+    outline: none !important;
+    background-color: #fff !important;
+}
+
+/* ── Inputs de texto ── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    font-family: 'Inter', sans-serif !important;
+    border: 1.5px solid #b8cfe8 !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    background-color: #f5f8ff !important;
+    transition: all 0.2s !important;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #0072bc !important;
+    background-color: #fff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0,114,188,0.15) !important;
+}
+
+/* ============================================================
+   STICKY BAR — La barra que contiene los botones de acción
+   ============================================================ */
+.sticky.bar {
+    background: rgba(255,255,255,0.95) !important;
+    border-bottom: 1px solid rgba(0,60,140,0.1) !important;
+    margin-bottom: 15px !important;
+    padding: 10px 0 !important;
+}
+
+.sticky.bar h2 {
+    color: #002060 !important;
+    margin: 0 !important;
+}

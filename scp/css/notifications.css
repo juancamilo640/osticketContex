@@ -1,0 +1,148 @@
+/* ============================================
+   osTicket Real-Time Notification System
+   Toast & Bell Styles
+   ============================================ */
+
+/* Toast Container - fixed bottom-right */
+#ost-toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    max-height: 80vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Individual Toast Card */
+.ost-toast {
+    pointer-events: auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.08);
+    border-left: 4px solid #3498db;
+    padding: 12px 16px;
+    min-width: 300px;
+    max-width: 380px;
+    cursor: pointer;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.4s ease;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.ost-toast.ost-toast-show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.ost-toast:hover {
+    box-shadow: 0 6px 32px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateX(-4px);
+}
+
+/* Toast Close Button */
+.ost-toast-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 18px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.ost-toast-close:hover {
+    color: #e74c3c;
+}
+
+/* Toast Header */
+.ost-toast-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+}
+
+.ost-toast-header i {
+    font-size: 14px;
+}
+
+.ost-toast-header strong {
+    font-weight: 600;
+    font-size: 12px;
+    color: #333;
+}
+
+.ost-toast-time {
+    margin-left: auto;
+    color: #999;
+    font-size: 11px;
+}
+
+/* Toast Body */
+.ost-toast-body {
+    position: relative;
+}
+
+.ost-toast-ticket {
+    font-size: 11px;
+    color: #999;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.ost-toast-subject {
+    font-size: 13px;
+    font-weight: 500;
+    color: #222;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+
+.ost-toast-user {
+    font-size: 11px;
+    color: #777;
+}
+
+/* Bell Icon in Header */
+#ost-notif-bell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+#ost-notif-bell:hover {
+    transform: scale(1.15);
+}
+
+#ost-notif-bell i {
+    color: #555;
+    font-size: 16px;
+}
+
+/* Notification Badge Pulse */
+#ost-notif-badge {
+    animation: ost-badge-pulse 1.5s ease-in-out 3;
+}
+
+@keyframes ost-badge-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Dark mode support (if body has dark class) */
+body.dark #ost-toast-container .ost-toast {
+    background: #2a2a2a;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+body.dark .ost-toast-subject { color: #eee; }
+body.dark .ost-toast-header strong { color: #ddd; }
+body.dark .ost-toast-close { color: #666; }
