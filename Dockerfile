@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd mysqli zip intl xml opcache
 
+# TRUCO MÁGICO: Activar output_buffering para evitar errores de Headers en osTicket
+RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini
+
 # Activar el módulo rewrite de Apache requerido por osTicket
 RUN a2enmod rewrite
 
