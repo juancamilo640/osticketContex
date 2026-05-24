@@ -28,12 +28,13 @@ RUN wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket
 # 5. Configurar el archivo base de configuración
 RUN mv /var/www/html/include/ost-sampleconfig.php /var/www/html/include/ost-config.php
 
-# 6. CONFIGURACIÓN LIMPIA DE PHP: Guardar errores en silencio sin ensuciar la pantalla web
+# 6. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
 RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "error_reporting = E_ALL & ~E_DEPRECATED & ~E_NOTICE" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
-    && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
+    && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
+    && echo "mysqli.default_ssl = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
 
 # 7. Asignar permisos correctos de Linux
 RUN chown -R www-data:www-data /var/www/html/ \
