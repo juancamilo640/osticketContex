@@ -17,11 +17,15 @@ RUN a2enmod rewrite
 # 3. Limpiar la carpeta por defecto de Apache
 RUN rm -rf /var/www/html/*
 
-# 4. COPIAR TUS PROPIOS ARCHIVOS DESDE TU COMPUTADORA AL SERVIDOR
-# (Esto incluye tus estilos CSS editados)
+# 4. Copiar los archivos de tu computadora al contenedor
 COPY . /var/www/html/
 
-# 5. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
+# 5. Crear el archivo de configuración solo si no existe para evitar fallos
+RUN if [ ! -f /var/www/html/include/ost-config.php ] && [ -f /var/www/html/include/ost-sampleconfig.php ]; then \
+        cp /var/www/html/include/ost-sampleconfig.php /var/www/html/include/ost-config.php; \
+    fi
+
+# 6. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
 RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
@@ -29,10 +33,9 @@ RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.i
     && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "mysqli.default_ssl = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
 
-# 6. Asignar permisos correctos de Linux
+# 7. Asignar permisos correctos de Linux de forma segura
 RUN chown -R www-data:www-data /var/www/html/ \
     && find /var/www/html/ -type d -exec chmod 755 {} \; \
-    && find /var/www/html/ -type f -exec chmod 666 {} \; \
-    && chmod 777 /var/www/html/include/ost-config.php
+    && find /var/www/html/ -type f -exec chmod 666 {} \;
 
 EXPOSE 80
