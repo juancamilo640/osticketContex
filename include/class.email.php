@@ -11,7 +11,7 @@
 
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
-require_once(INCLUDE_DIR.'laminas-mail/vendor/autoload.php');
+//require_once(INCLUDE_DIR.'laminas-mail/vendor/autoload.php');
 include_once INCLUDE_DIR.'class.role.php';
 include_once(INCLUDE_DIR.'class.dept.php');
 include_once(INCLUDE_DIR.'class.mail.php');
