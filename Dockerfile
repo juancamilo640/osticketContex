@@ -8,27 +8,20 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libicu-dev \
     libxml2-dev \
-    wget \
-    unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd mysqli zip intl xml opcache
 
 # 2. Habilitar reescritura de Apache
 RUN a2enmod rewrite
 
-# 3. Limpiar la carpeta del servidor
+# 3. Limpiar la carpeta por defecto de Apache
 RUN rm -rf /var/www/html/*
 
-# 4. Descargar osTicket original de fábrica directamente al servidor
-RUN wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket-v1.18.1.zip -O /tmp/osticket.zip \
-    && unzip /tmp/osticket.zip -d /tmp/osticket \
-    && cp -r /tmp/osticket/upload/* /var/www/html/ \
-    && rm -rf /tmp/osticket.zip /tmp/osticket
+# 4. COPIAR TUS PROPIOS ARCHIVOS DESDE TU COMPUTADORA AL SERVIDOR
+# (Esto incluye tus estilos CSS editados)
+COPY . /var/www/html/
 
-# 5. Configurar el archivo base de configuración
-RUN mv /var/www/html/include/ost-sampleconfig.php /var/www/html/include/ost-config.php
-
-# 6. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
+# 5. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
 RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "display_startup_errors = Off" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
@@ -36,7 +29,7 @@ RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.i
     && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "mysqli.default_ssl = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
 
-# 7. Asignar permisos correctos de Linux
+# 6. Asignar permisos correctos de Linux
 RUN chown -R www-data:www-data /var/www/html/ \
     && find /var/www/html/ -type d -exec chmod 755 {} \; \
     && find /var/www/html/ -type f -exec chmod 666 {} \; \
