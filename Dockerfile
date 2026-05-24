@@ -11,17 +11,22 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd mysqli zip intl xml opcache
 
-# TRUCO MÁGICO: Activar output_buffering para evitar errores de Headers en osTicket
-RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini
+# CONFIGURACIÓN RADICAL: Forzar a PHP a escupir los errores en la consola de Render
+RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
+    && echo "display_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
+    && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
+    && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
+    && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
 
-# Activar el módulo rewrite de Apache requerido por osTicket
+# Activar el módulo rewrite de Apache
 RUN a2enmod rewrite
 
-# Copiar el código del proyecto al directorio web de Apache
+# Copiar el código del proyecto
 COPY . /var/www/html/
 
-# Asegurar los permisos correctos de lectura y escritura
+# Permisos correctos de lectura y ejecución
 RUN chown -R www-data:www-data /var/www/html/ \
-    && chmod -R 755 /var/www/html/
+    && find /var/www/html/ -type d -exec chmod 755 {} \; \
+    && find /var/www/html/ -type f -exec chmod 644 {} \;
 
 EXPOSE 80
