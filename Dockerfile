@@ -19,14 +19,25 @@ RUN a2enmod rewrite
 # 3. Limpiar la carpeta del servidor
 RUN rm -rf /var/www/html/*
 
-# 4. Descargar osTicket original de fábrica directamente al servidor
+# 4. Descargar osTicket original de fábrica
 RUN wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket-v1.18.1.zip -O /tmp/osticket.zip \
     && unzip /tmp/osticket.zip -d /tmp/osticket \
     && cp -r /tmp/osticket/upload/* /var/www/html/ \
     && rm -rf /tmp/osticket.zip /tmp/osticket
 
-# 5. Configurar el archivo base de configuración
-RUN mv /var/www/html/include/ost-sampleconfig.php /var/www/html/include/ost-config.php
+# 5. CREAR EL ARCHIVO DE CONFIGURACIÓN FIJO
+# >>> REEMPLAZA LOS VALORES ENTRE COMILLAS CON TUS DATOS DE AIVEN <<<
+RUN echo "<?php \
+define('OSTINSTALLED',TRUE); \
+define('TABLE_PREFIX','ost_'); \
+define('ADMIN_EMAIL','juan_villalobos5024@americana.edu.co'); \
+define('SECRET_SALT','unaclavesecretacualquiera123'); \
+define('DBTYPE','mysql'); \
+define('DBHOST','TU_HOST_DE_AIVEN'); \
+define('DBNAME','defaultdb'); \
+define('DBUSER','avnadmin'); \
+define('DBPASS','TU_CONTRASEÑA_DE_AIVEN'); \
+?>" > /var/www/html/include/ost-config.php
 
 # 6. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
 RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
@@ -36,13 +47,10 @@ RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.i
     && echo "log_errors = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini \
     && echo "mysqli.default_ssl = On" >> /usr/local/etc/php/conf.d/osticket-settings.ini
 
-# 7. Asignar permisos correctos de Linux
+# 7. Asignar permisos correctos de Linux y eliminar instalador para evitar bucles
 RUN chown -R www-data:www-data /var/www/html/ \
     && find /var/www/html/ -type d -exec chmod 755 {} \; \
-    && find /var/www/html/ -type f -exec chmod 666 {} \; \
-    && chmod 777 /var/www/html/include/ost-config.php
-
-# 8. TRUCO FINAL: Quitar el instalador del camino para activar el sistema
-RUN mv /var/www/html/setup /var/www/html/setup_done
+    && find /var/www/html/ -type f -exec chmod 644 {} \; \
+    && rm -rf /var/www/html/setup
 
 EXPOSE 80
