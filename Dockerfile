@@ -28,16 +28,16 @@ RUN wget https://github.com/osTicket/osTicket/releases/download/v1.18.1/osTicket
 # 5. CREAR EL ARCHIVO DE CONFIGURACIÓN FIJO
 # >>> REEMPLAZA LOS VALORES ENTRE COMILLAS CON TUS DATOS DE AIVEN <<<
 RUN echo "<?php \
-define('OSTINSTALLED',TRUE); \
-define('TABLE_PREFIX','ost_'); \
-define('ADMIN_EMAIL','juan_villalobos5024@americana.edu.co'); \
-define('SECRET_SALT','unaclavesecretacualquiera123'); \
-define('DBTYPE','mysql'); \
-define('DBHOST','TU_HOST_DE_AIVEN'); \
-define('DBNAME','defaultdb'); \
-define('DBUSER','avnadmin'); \
-define('DBPASS','TU_CONTRASEÑA_DE_AIVEN'); \
-?>" > /var/www/html/include/ost-config.php
+    define('OSTINSTALLED',TRUE); \
+    define('TABLE_PREFIX','ost_'); \
+    define('ADMIN_EMAIL','juan_villalobos5024@americana.edu.co'); \
+    define('SECRET_SALT','unaclavesecretacualquiera123'); \
+    define('DBTYPE','mysql'); \
+    define('DBHOST','TU_HOST_DE_AIVEN'); \
+    define('DBNAME','defaultdb'); \
+    define('DBUSER','avnadmin'); \
+    define('DBPASS','TU_CONTRASEÑA_DE_AIVEN'); \
+    ?>" > /var/www/html/include/ost-config.php
 
 # 6. CONFIGURACIÓN DE PHP Y FORZADO DE SSL PARA MYSQL
 RUN echo "output_buffering = On" > /usr/local/etc/php/conf.d/osticket-settings.ini \
